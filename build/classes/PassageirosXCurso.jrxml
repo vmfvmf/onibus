@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3bbb1baa-a512-450b-ab4d-7cd6e03ecadc">
+	<property name="ireport.zoom" value="0.7513148009015777"/>
+	<property name="ireport.x" value="21"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select c.curso, p.semestre, count(*) from passageiro p inner join curso c on p.curso_id = c.id group by p.curso_id, p.semestre
+
+order by p.semestre, c.curso]]>
+	</queryString>
+	<field name="curso" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="semestre" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="count(*)" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="31" uuid="f2a9cfbb-2479-4342-bb3e-0bbdbc054f65"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GRÁFICO DE PASSAGEIROS POR CURSO E SEMESTRE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="476" splitType="Stretch">
+			<stackedAreaChart>
+				<chart>
+					<reportElement x="0" y="48" width="802" height="330" uuid="53c75b96-2438-4817-bb21-8da93cfd3148"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{curso}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{semestre}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{count(*)}]]></valueExpression>
+						<labelExpression><![CDATA["CURSAO"]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<areaPlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</areaPlot>
+			</stackedAreaChart>
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="48" uuid="7c60ff90-b9df-40fa-a829-632536ce5e1f"/>
+				<text><![CDATA[COMO INTERPRETAR O GRÁFICO: O Eixo Y representa o número de passageiros, o Eixo X representa os Semestres e as Áreas coloridas representam os cursos.
+EXEMPLO: Para sabermos o número de passageiros da turma de Sistemas de Informação do 1º Semestre, verificamos o valor máximo da area, neste caso é 14, e subtraímos pelo valor minimo, neste caso 9, do curso em questão, assim resultando em 5 o número de passageiros nas condições citadas anteriormente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="48" uuid="7c60ff90-b9df-40fa-a829-632536ce5e1f"/>
+				<text><![CDATA[COMO INTERPRETAR O GRÁFICO: O Eixo Y representa o número de passageiros, o Eixo X representa os Semestres e as Áreas coloridas representam os cursos.
+EXEMPLO: Para sabermos o número de passageiros da turma de Sistemas de Informação do 1º Semestre, verificamos o valor máximo da area, neste caso é 14, e subtraímos pelo valor minimo, neste caso 9, do curso em questão, assim resultando em 5 o número de passageiros nas condições citadas anteriormente.]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="457" width="802" height="19" uuid="73b80c1d-376a-410a-b2fc-ab6d4d7408b5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
