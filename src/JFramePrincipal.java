@@ -211,7 +211,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jDBConnection1.setURL("jdbc:mysql://localhost/onibus");
         jDBConnection1.setDriver("com.mysql.jdbc.Driver");
         jDBConnection1.setFilePath("");
-        jDBConnection1.setPassword("");
+        jDBConnection1.setPassword("9fs2w9w2");
         jDBConnection1.setUserName("root");
 
         jDBQueryPassageiros.setJDBConnection(jDBConnection1);

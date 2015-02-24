@@ -7,7 +7,7 @@
         <Property name="URL" type="java.lang.String" value="jdbc:mysql://localhost/onibus"/>
         <Property name="driver" type="java.lang.String" value="com.mysql.jdbc.Driver"/>
         <Property name="filePath" type="java.lang.String" value=""/>
-        <Property name="password" type="java.lang.String" value=""/>
+        <Property name="password" type="java.lang.String" value="9fs2w9w2"/>
         <Property name="userName" type="java.lang.String" value="root"/>
       </Properties>
     </Component>
