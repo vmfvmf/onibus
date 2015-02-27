@@ -1,10 +1,10 @@
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import lib.jdb.connection.JDBConnection;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -20,7 +20,9 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author vi
  */
 public class JFramePrincipal extends javax.swing.JFrame {
-
+    JFramePassageiros jfPassageiros=null;
+    JFrameMensalidades jfMensalidades=null;
+    JFrameDespesas jfDespesas=null;
     String SQLPassageiros = "select  p.id,  p.curso_id, p.nome_completo as \"Nome\",  "
             + "p.cpf as \"CPF\", c.curso as \"Curso\",  p.classificacao as \"Classificação\" , "
             + " p.vai, p.volta  from passageiro p  inner join curso c on p.curso_id = c.id ",
@@ -30,14 +32,43 @@ public class JFramePrincipal extends javax.swing.JFrame {
         initComponents();
         jDBConnection1.connectDB();
         jDBQueryPassageiros.execQuery();
-        jDBQueryMotorista.execQuery();
         jDBQueryConfig.execQuery();
-        jDBQueryRegistroDiario.execQuery();
         jDBQueryDespesas.execQuery();
         jDBQueryMensallidade.execQuery();
-        jComboBoxBalancoMesesActionPerformed(null);
+    }
+    
+    public JDBConnection getJDBConnection(){
+        return jDBConnection1;
     }
 
+    public void JFramePassageiros(){
+        if(jfPassageiros!=null){
+            jfPassageiros.dispose();
+        }
+        jfPassageiros=new JFramePassageiros(this);
+        jfPassageiros.show();
+    }
+    public void JFramePassageiros(int passageiroId){
+        if(jfPassageiros!=null){
+            jfPassageiros.dispose();
+        }
+        jfPassageiros=new JFramePassageiros(this, passageiroId);
+        jfPassageiros.show();
+    }
+    public void JFrameMensalidades(){
+        if(jfMensalidades!=null){
+            jfMensalidades.dispose();
+        }
+        jfMensalidades=new JFrameMensalidades(this);
+        jfMensalidades.show();
+    }
+    public void JFrameMensalidades(int mensalidadeId){
+        if(jfMensalidades!=null){
+            jfMensalidades.dispose();
+        }
+        jfMensalidades=new JFrameMensalidades(this, mensalidadeId);
+        jfMensalidades.show();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,160 +80,17 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jDBConnection1 = new lib.jdb.connection.JDBConnection();
         jDBQueryPassageiros = new lib.jdb.jdbquery.JDBQuery();
-        jDBControlStyle1 = new lib.jdb.control.jdbcontrolstyle.JDBControlStyle();
-        jDBQuerySlavePassageiroEndereco = new lib.jdb.jdbquery.JDBQuerySlave();
         jDBUpdateTransaction1 = new lib.jdb.jdbupdatetransaction.JDBUpdateTransaction();
-        jDBQueryCursos = new lib.jdb.jdbquery.JDBQuery();
-        jDBQuerySlavePassageiro = new lib.jdb.jdbquery.JDBQuerySlave();
-        jDBQuerySlavePassageiroContatos = new lib.jdb.jdbquery.JDBQuerySlave();
-        jDBQueryMotorista = new lib.jdb.jdbquery.JDBQuery();
-        jDBQuerySlaveMotoristaContatos = new lib.jdb.jdbquery.JDBQuerySlave();
         jDBQueryConfig = new lib.jdb.jdbquery.JDBQuery();
-        jDBQueryRegistroDiario = new lib.jdb.jdbquery.JDBQuery();
         jDBQueryDespesas = new lib.jdb.jdbquery.JDBQuery();
-        jDBQuerySlavePassageiroMensalidades = new lib.jdb.jdbquery.JDBQuerySlave();
         jDBQueryMensallidade = new lib.jdb.jdbquery.JDBQuery();
-        jDBQuerySlaveMotoristaEndereco = new lib.jdb.jdbquery.JDBQuerySlave();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel14 = new javax.swing.JPanel();
-        jTabbedPane5 = new javax.swing.JTabbedPane();
-        jPanel17 = new javax.swing.JPanel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jDBTable8 = new lib.jdb.control.jdbtable.JDBTable();
-        jDBButtonNew6 = new lib.jdb.control.jdbbuttonnew.JDBButtonNew();
-        jDBButtonSave9 = new lib.jdb.control.jdbbuttonsave.JDBButtonSave();
-        jDBButtonDelete6 = new lib.jdb.control.jdbbuttondelete.JDBButtonDelete();
-        jLabel40 = new javax.swing.JLabel();
-        jDBTextField29 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jDBTextField35 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jDBTextArea2 = new lib.jdb.control.jdbtextarea.JDBTextArea();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabelTotalDespesas = new javax.swing.JLabel();
-        jLabelBalncoMensal = new javax.swing.JLabel();
-        jLabelBalancoEntradas = new javax.swing.JLabel();
-        jComboBoxBalancoMeses = new javax.swing.JComboBox();
-        jSeparator3 = new javax.swing.JSeparator();
-        jLabelBalancoEntradas1 = new javax.swing.JLabel();
-        jLabelTotalDespesas1 = new javax.swing.JLabel();
-        jLabelBalancoEntradasQtd = new javax.swing.JLabel();
-        jLabelTotalDespesasQtd = new javax.swing.JLabel();
-        jLabelBalance2 = new javax.swing.JLabel();
-        jLabelBalanco = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jDBTable9 = new lib.jdb.control.jdbtable.JDBTable();
-        jButton6 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel36 = new javax.swing.JLabel();
-        jDBTextField31 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel41 = new javax.swing.JLabel();
-        jDBTextField32 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel43 = new javax.swing.JLabel();
-        jDBTextField33 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel44 = new javax.swing.JLabel();
-        jDBTextField34 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jDBButtonSave10 = new lib.jdb.control.jdbbuttonsave.JDBButtonSave();
-        jComboBoxSituacaoMensalidade = new javax.swing.JComboBox();
-        jComboBoxmeses = new javax.swing.JComboBox();
-        jLabelRecebido = new javax.swing.JLabel();
-        jLabelAReceber = new javax.swing.JLabel();
-        jLabelMensalidadesTotal = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jDBTable7 = new lib.jdb.control.jdbtable.JDBTable();
-        jLabel1 = new javax.swing.JLabel();
-        jDBTextField1 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel27 = new javax.swing.JLabel();
-        jDBTextField24 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel28 = new javax.swing.JLabel();
-        jDBTextArea1 = new lib.jdb.control.jdbtextarea.JDBTextArea();
-        jDBButtonSave8 = new lib.jdb.control.jdbbuttonsave.JDBButtonSave();
-        jDBButtonNew5 = new lib.jdb.control.jdbbuttonnew.JDBButtonNew();
-        jDBButtonDelete5 = new lib.jdb.control.jdbbuttondelete.JDBButtonDelete();
-        jPanel12 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jDBTable1 = new lib.jdb.control.jdbtable.JDBTable();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jDBTextField9 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jDBTextField10 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jDBLookUpComboBox1 = new lib.jdb.control.jdblookupcombobox.JDBLookUpComboBox();
-        jLabel12 = new javax.swing.JLabel();
-        jDBTextField11 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jDBComboBox1 = new lib.jdb.control.jdbcombobox.JDBComboBox();
-        jLabel14 = new javax.swing.JLabel();
-        jDBButtonSave2 = new lib.jdb.control.jdbbuttonsave.JDBButtonSave();
-        jDBButtonNew1 = new lib.jdb.control.jdbbuttonnew.JDBButtonNew();
-        jDBButtonDelete4 = new lib.jdb.control.jdbbuttondelete.JDBButtonDelete();
-        jDBCheckBox1 = new lib.jdb.control.jdbcheckbox.JDBCheckBox();
-        jDBCheckBox2 = new lib.jdb.control.jdbcheckbox.JDBCheckBox();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jDBTextField4 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jDBTextField5 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jDBTextField6 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jDBButtonSave1 = new lib.jdb.control.jdbbuttonsave.JDBButtonSave();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jDBTable2 = new lib.jdb.control.jdbtable.JDBTable();
-        jLabel15 = new javax.swing.JLabel();
-        jDBComboBox2 = new lib.jdb.control.jdbcombobox.JDBComboBox();
-        jDBTextField12 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jDBButtonSave3 = new lib.jdb.control.jdbbuttonsave.JDBButtonSave();
-        jDBButtonNew2 = new lib.jdb.control.jdbbuttonnew.JDBButtonNew();
-        jDBButtonDelete1 = new lib.jdb.control.jdbbuttondelete.JDBButtonDelete();
-        jPanel7 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jDBTable5 = new lib.jdb.control.jdbtable.JDBTable();
+        jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jTextFieldBuscapassageiroNome = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jDBTable3 = new lib.jdb.control.jdbtable.JDBTable();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jDBTextField13 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jDBTextField14 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jDBTextFieldSalarioBruto = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jDBButtonSave4 = new lib.jdb.control.jdbbuttonsave.JDBButtonSave();
-        jDBButtonNew3 = new lib.jdb.control.jdbbuttonnew.JDBButtonNew();
-        jLabelSalLiquido = new javax.swing.JLabel();
-        jDBButtonDelete3 = new lib.jdb.control.jdbbuttondelete.JDBButtonDelete();
-        jLabel3 = new javax.swing.JLabel();
-        jDBTextField3 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel35 = new javax.swing.JLabel();
-        jDBTextField26 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jDBTextField16 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel22 = new javax.swing.JLabel();
-        jDBTextField17 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jLabel23 = new javax.swing.JLabel();
-        jDBTextField18 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jDBButtonSave5 = new lib.jdb.control.jdbbuttonsave.JDBButtonSave();
-        jPanel11 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jDBTable4 = new lib.jdb.control.jdbtable.JDBTable();
-        jLabel26 = new javax.swing.JLabel();
-        jDBComboBox4 = new lib.jdb.control.jdbcombobox.JDBComboBox();
-        jDBTextField21 = new lib.jdb.control.jdbtextfield.JDBTextField();
-        jDBButtonSave6 = new lib.jdb.control.jdbbuttonsave.JDBButtonSave();
-        jDBButtonNew4 = new lib.jdb.control.jdbbuttonnew.JDBButtonNew();
-        jDBButtonDelete2 = new lib.jdb.control.jdbbuttondelete.JDBButtonDelete();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jDBTextField2 = new lib.jdb.control.jdbtextfield.JDBTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -211,114 +99,17 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jDBConnection1.setURL("jdbc:mysql://localhost/onibus");
         jDBConnection1.setDriver("com.mysql.jdbc.Driver");
         jDBConnection1.setFilePath("");
-        jDBConnection1.setPassword("9fs2w9w2");
+        jDBConnection1.setPassword("");
         jDBConnection1.setUserName("root");
 
         jDBQueryPassageiros.setJDBConnection(jDBConnection1);
         jDBQueryPassageiros.setSQL("select \np.id, \np.curso_id,\np.nome_completo as \"Nome\", \np.cpf as \"CPF\",\nc.curso as \"Curso\", \np.classificacao as \"Classificação\" ,\np.vai,\np.volta\n\nfrom passageiro p \ninner join curso c on p.curso_id = c.id\n\norder by p.nome_completo");
         jDBQueryPassageiros.setConcurUpdatable(false);
 
-        jDBQuerySlavePassageiroEndereco.setJDBConnection(jDBConnection1);
-        jDBQuerySlavePassageiroEndereco.setJDBQueryMaster(jDBQueryPassageiros);
-        jDBQuerySlavePassageiroEndereco.setSQL("select * from endereco_passageiro where passageiro_id =  {$id}");
-        jDBQuerySlavePassageiroEndereco.setMasterKeyField("id");
-        jDBQuerySlavePassageiroEndereco.setSaveManually(true);
-        jDBQuerySlavePassageiroEndereco.setSlaveForeignKeyField("passageiro_id");
-        jDBQuerySlavePassageiroEndereco.addSaveManuallyEventListener(new lib.jdb.jdbquery.event.SaveManuallyEventListener() {
-            public void onSaveManually(lib.jdb.jdbquery.event.SaveManuallyEventObject evt) {
-                jDBQuerySlavePassageiroEnderecoOnSaveManually(evt);
-            }
-        });
-        jDBQuerySlavePassageiroEndereco.addExecQueryEventListener(new lib.jdb.jdbquery.event.ExecQueryEventListener() {
-            public void beforeExecQuery(lib.jdb.jdbquery.event.ExecQueryEventObject evt) {
-            }
-            public void afterExecQuery(lib.jdb.jdbquery.event.ExecQueryEventObject evt) {
-                jDBQuerySlavePassageiroEnderecoAfterExecQuery(evt);
-            }
-        });
-
         jDBUpdateTransaction1.setJDBConnection(jDBConnection1);
-
-        jDBQueryCursos.setJDBConnection(jDBConnection1);
-        jDBQueryCursos.setSQL("select * from curso");
-
-        jDBQuerySlavePassageiro.setJDBConnection(jDBConnection1);
-        jDBQuerySlavePassageiro.setJDBQueryMaster(jDBQueryPassageiros);
-        jDBQuerySlavePassageiro.setSQL("select * from passageiro where id = {$id}");
-        jDBQuerySlavePassageiro.setMasterKeyField("id");
-        jDBQuerySlavePassageiro.setSlaveForeignKeyField("id");
-        jDBQuerySlavePassageiro.addInsertEventListener(new lib.jdb.jdbquery.event.InsertEventListener() {
-            public void beforeInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {
-                jDBQuerySlavePassageiroBeforeInsert(evt);
-            }
-            public void afterInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {
-            }
-        });
-        jDBQuerySlavePassageiro.addSaveEventListener(new lib.jdb.jdbquery.event.SaveEventListener() {
-            public void beforeSave(lib.jdb.jdbquery.event.SaveEventObject evt) {
-            }
-            public void afterSave(lib.jdb.jdbquery.event.SaveEventObject evt) {
-                jDBQuerySlavePassageiroAfterSave(evt);
-            }
-        });
-
-        jDBQuerySlavePassageiroContatos.setJDBConnection(jDBConnection1);
-        jDBQuerySlavePassageiroContatos.setJDBQueryMaster(jDBQueryPassageiros);
-        jDBQuerySlavePassageiroContatos.setSQL("select * from contato where id in( select contato_id from passageiro_contatos where passageiro_id = {$id})");
-        jDBQuerySlavePassageiroContatos.setMasterKeyField("id");
-        jDBQuerySlavePassageiroContatos.setSlaveForeignKeyField("id");
-        jDBQuerySlavePassageiroContatos.addInsertEventListener(new lib.jdb.jdbquery.event.InsertEventListener() {
-            public void beforeInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {
-                jDBQuerySlavePassageiroContatosBeforeInsert(evt);
-            }
-            public void afterInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {
-                jDBQuerySlavePassageiroContatosAfterInsert(evt);
-            }
-        });
-
-        jDBQueryMotorista.setJDBConnection(jDBConnection1);
-        jDBQueryMotorista.setSQL("select * from motorista");
-        jDBQueryMotorista.addScrollEventListener(new lib.jdb.jdbquery.event.ScrollEventListener() {
-            public void beforeScroll(lib.jdb.jdbquery.event.ScrollEventObject evt) {
-            }
-            public void afterScroll(lib.jdb.jdbquery.event.ScrollEventObject evt) {
-                jDBQueryMotoristaAfterScroll(evt);
-            }
-        });
-
-        jDBQuerySlaveMotoristaContatos.setJDBConnection(jDBConnection1);
-        jDBQuerySlaveMotoristaContatos.setJDBQueryMaster(jDBQueryMotorista);
-        jDBQuerySlaveMotoristaContatos.setSQL("select * from contato where id in( select contato_id from motorista_contatos where motorista_id = {$id})");
-        jDBQuerySlaveMotoristaContatos.setMasterKeyField("id");
-        jDBQuerySlaveMotoristaContatos.setSlaveForeignKeyField("id");
-        jDBQuerySlaveMotoristaContatos.addInsertEventListener(new lib.jdb.jdbquery.event.InsertEventListener() {
-            public void beforeInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {
-                jDBQuerySlaveMotoristaContatosBeforeInsert(evt);
-            }
-            public void afterInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {
-                jDBQuerySlaveMotoristaContatosAfterInsert(evt);
-            }
-        });
 
         jDBQueryConfig.setJDBConnection(jDBConnection1);
         jDBQueryConfig.setSQL("select * from configuracao");
-
-        jDBQueryRegistroDiario.setJDBConnection(jDBConnection1);
-        jDBQueryRegistroDiario.setSQL("select * from registro_diario");
-        jDBQueryRegistroDiario.addInsertEventListener(new lib.jdb.jdbquery.event.InsertEventListener() {
-            public void beforeInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {
-                jDBQueryRegistroDiarioBeforeInsert(evt);
-            }
-            public void afterInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {
-            }
-        });
-        jDBQueryRegistroDiario.addScrollEventListener(new lib.jdb.jdbquery.event.ScrollEventListener() {
-            public void beforeScroll(lib.jdb.jdbquery.event.ScrollEventObject evt) {
-            }
-            public void afterScroll(lib.jdb.jdbquery.event.ScrollEventObject evt) {
-                jDBQueryRegistroDiarioAfterScroll(evt);
-            }
-        });
 
         jDBQueryDespesas.setJDBConnection(jDBConnection1);
         jDBQueryDespesas.setSQL("select * from despesa");
@@ -330,12 +121,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        jDBQuerySlavePassageiroMensalidades.setJDBConnection(jDBConnection1);
-        jDBQuerySlavePassageiroMensalidades.setJDBQueryMaster(jDBQueryPassageiros);
-        jDBQuerySlavePassageiroMensalidades.setSQL("select * from mensalidade where passageiro_id = {$id}");
-        jDBQuerySlavePassageiroMensalidades.setMasterKeyField("id");
-        jDBQuerySlavePassageiroMensalidades.setSlaveForeignKeyField("passageiro_id");
-
         jDBQueryMensallidade.setJDBConnection(jDBConnection1);
         jDBQueryMensallidade.setSQL("select * from mensalidade");
         jDBQueryMensallidade.addExecQueryEventListener(new lib.jdb.jdbquery.event.ExecQueryEventListener() {
@@ -346,850 +131,40 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        jDBQuerySlaveMotoristaEndereco.setJDBConnection(jDBConnection1);
-        jDBQuerySlaveMotoristaEndereco.setJDBQueryMaster(jDBQueryMotorista);
-        jDBQuerySlaveMotoristaEndereco.setSQL("select * from endereco_motorista where motorista_id = {$id}");
-        jDBQuerySlaveMotoristaEndereco.setMasterKeyField("id");
-        jDBQuerySlaveMotoristaEndereco.setSaveManually(true);
-        jDBQuerySlaveMotoristaEndereco.setSlaveForeignKeyField("motorista_id");
-        jDBQuerySlaveMotoristaEndereco.addSaveManuallyEventListener(new lib.jdb.jdbquery.event.SaveManuallyEventListener() {
-            public void onSaveManually(lib.jdb.jdbquery.event.SaveManuallyEventObject evt) {
-                jDBQuerySlaveMotoristaEnderecoOnSaveManually(evt);
-            }
-        });
-        jDBQuerySlaveMotoristaEndereco.addExecQueryEventListener(new lib.jdb.jdbquery.event.ExecQueryEventListener() {
-            public void beforeExecQuery(lib.jdb.jdbquery.event.ExecQueryEventObject evt) {
-            }
-            public void afterExecQuery(lib.jdb.jdbquery.event.ExecQueryEventObject evt) {
-                jDBQuerySlaveMotoristaEnderecoAfterExecQuery(evt);
-            }
-        });
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jDBTable8.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jDBTable8.setJDBQuery(jDBQueryDespesas);
-        jDBTable8.setEditable(false);
-        jDBTable8.setInvisibleFields("id ");
-        jScrollPane9.setViewportView(jDBTable8);
-
-        jDBButtonNew6.setJDBQuery(jDBQueryDespesas);
-
-        jDBButtonSave9.setJDBQuery(jDBQueryDespesas);
-
-        jDBButtonDelete6.setJDBQuery(jDBQueryDespesas);
-
-        jLabel40.setText("Data");
-
-        jDBTextField29.setJDBQuery(jDBQueryDespesas);
-        jDBTextField29.setFieldName("data");
-        jDBTextField29.setjDBControlStyle(jDBControlStyle1);
-
-        jDBTextField35.setJDBQuery(jDBQueryDespesas);
-        jDBTextField35.setFieldName("valor");
-        jDBTextField35.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel45.setText("Valor");
-
-        jLabel46.setText("Resumo");
-
-        jDBTextArea2.setJDBQuery(jDBQueryDespesas);
-        jDBTextArea2.setFieldName("resumo");
-
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jLabelTotalDespesas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelTotalDespesas.setForeground(new java.awt.Color(204, 0, 0));
-        jLabelTotalDespesas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelTotalDespesas.setText("Total R$ ##,##");
-
-        jLabelBalncoMensal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabelBalncoMensal.setText("Balanço Mensal");
-
-        jLabelBalancoEntradas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelBalancoEntradas.setForeground(new java.awt.Color(0, 0, 255));
-        jLabelBalancoEntradas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelBalancoEntradas.setText("Total R$ ##,##");
-
-        jComboBoxBalancoMeses.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Fevereiro", "Março", "Abril", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro" }));
-        jComboBoxBalancoMeses.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Passageiros");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxBalancoMesesActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
-        jLabelBalancoEntradas1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelBalancoEntradas1.setForeground(new java.awt.Color(0, 0, 255));
-        jLabelBalancoEntradas1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelBalancoEntradas1.setText("RECEBIDO");
-
-        jLabelTotalDespesas1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelTotalDespesas1.setForeground(new java.awt.Color(204, 0, 0));
-        jLabelTotalDespesas1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelTotalDespesas1.setText("PAGO");
-
-        jLabelBalancoEntradasQtd.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelBalancoEntradasQtd.setForeground(new java.awt.Color(0, 0, 255));
-        jLabelBalancoEntradasQtd.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelBalancoEntradasQtd.setText("x mensalidades");
-
-        jLabelTotalDespesasQtd.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelTotalDespesasQtd.setForeground(new java.awt.Color(204, 0, 0));
-        jLabelTotalDespesasQtd.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelTotalDespesasQtd.setText("x contas");
-
-        jLabelBalance2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelBalance2.setForeground(new java.awt.Color(102, 153, 0));
-        jLabelBalance2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelBalance2.setText("TOTAL");
-
-        jLabelBalanco.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelBalanco.setForeground(new java.awt.Color(102, 153, 0));
-        jLabelBalanco.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelBalanco.setText("TOTAL");
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel17Layout.createSequentialGroup()
-                                .addComponent(jLabel46)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDBTextArea2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel17Layout.createSequentialGroup()
-                                    .addGap(54, 54, 54)
-                                    .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel17Layout.createSequentialGroup()
-                                            .addComponent(jLabel45)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jDBTextField35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(jPanel17Layout.createSequentialGroup()
-                                            .addComponent(jLabel40)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jDBTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(jPanel17Layout.createSequentialGroup()
-                                    .addComponent(jDBButtonDelete6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jDBButtonNew6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jDBButtonSave9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                                .addGap(0, 2, Short.MAX_VALUE)
-                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSeparator3)
-                                    .addGroup(jPanel17Layout.createSequentialGroup()
-                                        .addComponent(jLabelBalncoMensal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBoxBalancoMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(90, 90, 90))))
-                            .addGroup(jPanel17Layout.createSequentialGroup()
-                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelTotalDespesas1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelBalancoEntradas1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelBalancoEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelTotalDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel17Layout.createSequentialGroup()
-                                        .addComponent(jLabelBalancoEntradasQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jLabelTotalDespesasQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
-                            .addGroup(jPanel17Layout.createSequentialGroup()
-                                .addComponent(jLabelBalance2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelBalanco, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jDBTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel40))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jDBTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel45))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel46)
-                            .addComponent(jDBTextArea2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jDBButtonDelete6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDBButtonNew6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDBButtonSave9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(103, 103, 103))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jSeparator2)
-                        .addContainerGap())
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelBalncoMensal)
-                            .addComponent(jComboBoxBalancoMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel17Layout.createSequentialGroup()
-                                .addComponent(jLabelBalancoEntradas1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelTotalDespesas1))
-                            .addGroup(jPanel17Layout.createSequentialGroup()
-                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabelBalancoEntradas)
-                                    .addComponent(jLabelBalancoEntradasQtd))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabelTotalDespesas)
-                                    .addComponent(jLabelTotalDespesasQtd))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelBalance2)
-                            .addComponent(jLabelBalanco))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-
-        jTabbedPane5.addTab("Despesas", jPanel17);
-
-        jDBTable9.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jDBTable9.setJDBQuery(jDBQueryMensallidade);
-        jDBTable9.setEditable(false);
-        jDBTable9.setInvisibleFields("passageiro_id");
-        jScrollPane10.setViewportView(jDBTable9);
-
-        jButton6.setText("Gerar Mensalidades Mês Atual");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Passageiro");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jLabel36.setText("Vencimento");
-
-        jDBTextField31.setJDBQuery(jDBQueryMensallidade);
-        jDBTextField31.setFieldName("vencimento");
-        jDBTextField31.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel41.setText("Valor");
-
-        jDBTextField32.setJDBQuery(jDBQueryMensallidade);
-        jDBTextField32.setFieldName("valor");
-        jDBTextField32.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel43.setText("Recebido em");
-
-        jDBTextField33.setJDBQuery(jDBQueryMensallidade);
-        jDBTextField33.setFieldName("recebido_em");
-        jDBTextField33.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel44.setText("Valor Recebido");
-
-        jDBTextField34.setJDBQuery(jDBQueryMensallidade);
-        jDBTextField34.setFieldName("valor_recebido");
-        jDBTextField34.setjDBControlStyle(jDBControlStyle1);
-
-        jDBButtonSave10.setJDBQuery(jDBQueryMensallidade);
-
-        jComboBoxSituacaoMensalidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas", "Pagas", "Abertas" }));
-        jComboBoxSituacaoMensalidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxSituacaoMensalidadeActionPerformed(evt);
-            }
-        });
-
-        jComboBoxmeses.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Fevereiro", "Março", "Abril", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro" }));
-        jComboBoxmeses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxmesesActionPerformed(evt);
-            }
-        });
-
-        jLabelRecebido.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelRecebido.setText("Total Recebido R$ ##,##");
-
-        jLabelAReceber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelAReceber.setText("Total à Receber R$ ##,##");
-
-        jLabelMensalidadesTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelMensalidadesTotal.setText("De R$ ##,## | x faturas");
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton6)
-                            .addGroup(jPanel18Layout.createSequentialGroup()
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel43)
-                                    .addComponent(jLabel41)
-                                    .addComponent(jLabel36)
-                                    .addComponent(jLabel44))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDBTextField34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDBTextField31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDBTextField32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDBTextField33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel18Layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBoxmeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxSituacaoMensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelRecebido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelAReceber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                                    .addComponent(jLabelMensalidadesTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jDBButtonSave10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton3)
-                    .addComponent(jComboBoxSituacaoMensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxmeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36)
-                    .addComponent(jDBTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelRecebido))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAReceber)
-                    .addComponent(jDBTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel41))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel43)
-                        .addComponent(jDBTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel44)
-                        .addComponent(jDBTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelMensalidadesTotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
-                .addComponent(jDBButtonSave10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jTabbedPane5.addTab("Mensalidades", jPanel18);
-
-        jDBTable7.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jDBTable7.setJDBQuery(jDBQueryRegistroDiario);
-        jDBTable7.setEditable(false);
-        jDBTable7.setInvisibleFields("id ");
-        jScrollPane7.setViewportView(jDBTable7);
-
-        jLabel1.setText("Data");
-
-        jDBTextField1.setJDBQuery(jDBQueryRegistroDiario);
-        jDBTextField1.setFieldName("data");
-        jDBTextField1.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel27.setText("Passageiros");
-
-        jDBTextField24.setJDBQuery(jDBQueryRegistroDiario);
-        jDBTextField24.setFieldName("passageiros");
-        jDBTextField24.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel28.setText("Obs.");
-
-        jDBTextArea1.setJDBQuery(jDBQueryRegistroDiario);
-        jDBTextArea1.setFieldName("obs");
-        jDBTextArea1.setjDBControlStyle(jDBControlStyle1);
-
-        jDBButtonSave8.setJDBQuery(jDBQueryRegistroDiario);
-
-        jDBButtonNew5.setJDBQuery(jDBQueryRegistroDiario);
-
-        jDBButtonDelete5.setJDBQuery(jDBQueryRegistroDiario);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(351, Short.MAX_VALUE)
-                .addComponent(jDBButtonDelete5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDBButtonNew5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDBButtonSave8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDBTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                    .addComponent(jDBTextField24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel28)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDBTextArea1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(207, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jDBTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel28))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel27)
-                            .addComponent(jDBTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jDBTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(175, 175, 175)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBButtonSave8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonNew5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonDelete5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(351, Short.MAX_VALUE)))
-        );
-
-        jTabbedPane5.addTab("Registros Diários", jPanel1);
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
-        );
-
-        jTabbedPane5.addTab("Balanço", jPanel12);
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-
-        jTabbedPane1.addTab("Operação", jPanel14);
-
-        jDBTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jDBTable1.setJDBQuery(jDBQueryPassageiros);
-        jDBTable1.setCheckBoxIntoBooleanFields(true);
-        jDBTable1.setClickOnColumnsToSort(true);
-        jDBTable1.setEditable(false);
-        jDBTable1.setInvisibleFields("id curso_id");
-        jScrollPane1.setViewportView(jDBTable1);
-
-        jLabel10.setText("Nome");
-
-        jDBTextField9.setJDBQuery(jDBQuerySlavePassageiro);
-        jDBTextField9.setFieldName("nome_completo");
-        jDBTextField9.setjDBControlStyle(jDBControlStyle1);
-
-        jDBTextField10.setJDBQuery(jDBQuerySlavePassageiro);
-        jDBTextField10.setFieldName("cpf");
-        jDBTextField10.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel11.setText("CPF");
-
-        jDBLookUpComboBox1.setJDBListQuery(jDBQueryCursos);
-        jDBLookUpComboBox1.setJDBQuery(jDBQuerySlavePassageiro);
-        jDBLookUpComboBox1.setInvisibleFields("id total_semestres");
-        jDBLookUpComboBox1.setjDBControlStyle(jDBControlStyle1);
-        jDBLookUpComboBox1.setKeyField("curso_id");
-        jDBLookUpComboBox1.setKeyListField("id");
-
-        jLabel12.setText("Curso");
-
-        jDBTextField11.setJDBQuery(jDBQuerySlavePassageiro);
-        jDBTextField11.setFieldName("semestre");
-        jDBTextField11.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel13.setText("Semestre");
-
-        jDBComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "S", "A", "B", "C", "D" }));
-        jDBComboBox1.setJDBQuery(jDBQuerySlavePassageiro);
-        jDBComboBox1.setFieldName("classificacao");
-        jDBComboBox1.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel14.setText("Classificação");
-
-        jDBButtonSave2.setJDBQuery(jDBQuerySlavePassageiro);
-
-        jDBButtonNew1.setJDBQuery(jDBQuerySlavePassageiro);
-
-        jDBButtonDelete4.setJDBQuery(jDBQuerySlavePassageiro);
-
-        jDBCheckBox1.setJDBQuery(jDBQuerySlavePassageiro);
-        jDBCheckBox1.setFieldName("vai");
-        jDBCheckBox1.setText("Vai");
-
-        jDBCheckBox2.setJDBQuery(jDBQuerySlavePassageiro);
-        jDBCheckBox2.setFieldName("volta");
-        jDBCheckBox2.setText("Volta");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel8Layout.createSequentialGroup()
-                                    .addGap(43, 43, 43)
-                                    .addComponent(jLabel12))
-                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel10)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jDBTextField10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDBLookUpComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDBComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDBTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jDBTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jDBCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDBCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addGap(0, 331, Short.MAX_VALUE)
-                        .addComponent(jDBButtonDelete4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBButtonNew1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDBButtonSave2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jDBTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jDBTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(jDBComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBLookUpComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jDBTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBButtonSave2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonNew1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonDelete4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jTabbedPane2.addTab("Dados", jPanel8);
-
-        jLabel5.setText("Rua");
-
-        jDBTextField4.setJDBQuery(jDBQuerySlavePassageiroEndereco);
-        jDBTextField4.setFieldName("rua");
-        jDBTextField4.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel6.setText("Num.");
-
-        jDBTextField5.setJDBQuery(jDBQuerySlavePassageiroEndereco);
-        jDBTextField5.setFieldName("num");
-        jDBTextField5.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel7.setText("Bairro");
-
-        jDBTextField6.setJDBQuery(jDBQuerySlavePassageiroEndereco);
-        jDBTextField6.setFieldName("bairro");
-        jDBTextField6.setjDBControlStyle(jDBControlStyle1);
-
-        jDBButtonSave1.setJDBQuery(jDBQuerySlavePassageiroEndereco);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDBTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                    .addComponent(jDBTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDBTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
-                .addComponent(jDBButtonSave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jDBTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jDBTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jDBTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
-                .addComponent(jDBButtonSave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jTabbedPane2.addTab("Endereço", jPanel4);
-
-        jDBTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jDBTable2.setJDBQuery(jDBQuerySlavePassageiroContatos);
-        jDBTable2.setInvisibleFields("id");
-        jScrollPane2.setViewportView(jDBTable2);
-
-        jLabel15.setText("Tipo");
-
-        jDBComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Celular", "Email", "Telefone" }));
-        jDBComboBox2.setJDBQuery(jDBQuerySlavePassageiroContatos);
-        jDBComboBox2.setFieldName("tipo");
-        jDBComboBox2.setjDBControlStyle(jDBControlStyle1);
-
-        jDBTextField12.setJDBQuery(jDBQuerySlavePassageiroContatos);
-        jDBTextField12.setFieldName("contato");
-        jDBTextField12.setjDBControlStyle(jDBControlStyle1);
-
-        jDBButtonSave3.setJDBQuery(jDBQuerySlavePassageiroContatos);
-
-        jDBButtonNew2.setJDBQuery(jDBQuerySlavePassageiroContatos);
-
-        jDBButtonDelete1.setJDBQuery(jDBQuerySlavePassageiroContatos);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBTextField12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jDBButtonDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBButtonNew2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBButtonSave3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jDBComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBButtonSave3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonNew2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jTabbedPane2.addTab("Contatos", jPanel6);
-
-        jDBTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jDBTable5.setJDBQuery(jDBQuerySlavePassageiroMensalidades);
-        jDBTable5.setInvisibleFields("passageiro_id");
-        jScrollPane5.setViewportView(jDBTable5);
-
-        jButton4.setText("Pagar");
+        jButton4.setText("Mensalidades");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addGap(0, 24, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Mensalidades", jPanel7);
-
-        jLabel9.setText("Nome");
-
-        jTextFieldBuscapassageiroNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldBuscapassageiroNomeKeyReleased(evt);
+        jButton5.setText("Registro Diário");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Relatorio");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setText("Despesas");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("Motoristas");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -1197,329 +172,36 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane2)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldBuscapassageiroNome, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jButton2)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6)
+                    .addComponent(jButton7))
+                .addContainerGap(578, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextFieldBuscapassageiroNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("Passageiros", jPanel2);
-
-        jDBTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jDBTable3.setJDBQuery(jDBQueryMotorista);
-        jDBTable3.setEditable(false);
-        jDBTable3.setInvisibleFields("id");
-        jScrollPane3.setViewportView(jDBTable3);
-
-        jLabel16.setText("Nome");
-
-        jDBTextField13.setJDBQuery(jDBQueryMotorista);
-        jDBTextField13.setFieldName("motorista");
-        jDBTextField13.setjDBControlStyle(jDBControlStyle1);
-
-        jDBTextField14.setJDBQuery(jDBQueryMotorista);
-        jDBTextField14.setFieldName("cpf");
-        jDBTextField14.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel17.setText("CPF");
-
-        jDBTextFieldSalarioBruto.setJDBQuery(jDBQueryMotorista);
-        jDBTextFieldSalarioBruto.setFieldName("salario");
-        jDBTextFieldSalarioBruto.setjDBControlStyle(jDBControlStyle1);
-        jDBTextFieldSalarioBruto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jDBTextFieldSalarioBrutoKeyReleased(evt);
-            }
-        });
-
-        jLabel19.setText("Salário Bruto");
-
-        jDBButtonSave4.setJDBQuery(jDBQueryMotorista);
-
-        jDBButtonNew3.setJDBQuery(jDBQueryMotorista);
-
-        jLabelSalLiquido.setText("INSS R$ 0,00 + Salário Líquido R$ 0,00");
-
-        jDBButtonDelete3.setJDBQuery(jDBQueryMotorista);
-
-        jLabel3.setText("Dist. Trajeto");
-
-        jDBTextField3.setJDBQuery(jDBQueryMotorista);
-        jDBTextField3.setFieldName("distancia_trajeto");
-        jDBTextField3.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel35.setText("Comb./Km");
-
-        jDBTextField26.setJDBQuery(jDBQueryMotorista);
-        jDBTextField26.setFieldName("litro_combustivel_por_km");
-        jDBTextField26.setjDBControlStyle(jDBControlStyle1);
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel19)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel35)
-                        .addComponent(jLabel3)))
+                .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jDBTextFieldSalarioBruto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelSalLiquido, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
-                                .addGap(6, 6, 6))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jDBTextField13, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                                    .addComponent(jDBTextField14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(17, 17, 17))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jDBButtonDelete3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBButtonNew3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBButtonSave4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jDBTextField26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                            .addComponent(jDBTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jDBTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jDBTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBTextFieldSalarioBruto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabelSalLiquido))
+                .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel35))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBButtonSave4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonNew3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonDelete3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jTabbedPane3.addTab("Dados", jPanel9);
-
-        jLabel21.setText("Rua");
-
-        jDBTextField16.setJDBQuery(jDBQuerySlaveMotoristaEndereco);
-        jDBTextField16.setFieldName("rua");
-        jDBTextField16.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel22.setText("Num.");
-
-        jDBTextField17.setJDBQuery(jDBQuerySlaveMotoristaEndereco);
-        jDBTextField17.setFieldName("num");
-        jDBTextField17.setjDBControlStyle(jDBControlStyle1);
-
-        jLabel23.setText("Bairro");
-
-        jDBTextField18.setJDBQuery(jDBQuerySlaveMotoristaEndereco);
-        jDBTextField18.setFieldName("bairro");
-        jDBTextField18.setjDBControlStyle(jDBControlStyle1);
-
-        jDBButtonSave5.setJDBQuery(jDBQuerySlaveMotoristaEndereco);
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel22))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDBTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDBTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 314, Short.MAX_VALUE)
-                        .addComponent(jDBButtonSave5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jDBTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jDBTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(jDBTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jDBTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                .addComponent(jDBButtonSave5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jTabbedPane3.addTab("Endereço", jPanel10);
-
-        jDBTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jDBTable4.setJDBQuery(jDBQuerySlaveMotoristaContatos);
-        jDBTable4.setInvisibleFields("id");
-        jScrollPane4.setViewportView(jDBTable4);
-
-        jLabel26.setText("Tipo");
-
-        jDBComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Celular", "Email", "Telefone" }));
-        jDBComboBox4.setJDBQuery(jDBQuerySlaveMotoristaContatos);
-        jDBComboBox4.setFieldName("tipo");
-        jDBComboBox4.setjDBControlStyle(jDBControlStyle1);
-
-        jDBTextField21.setJDBQuery(jDBQuerySlaveMotoristaContatos);
-        jDBTextField21.setFieldName("contato");
-        jDBTextField21.setjDBControlStyle(jDBControlStyle1);
-
-        jDBButtonSave6.setJDBQuery(jDBQuerySlaveMotoristaContatos);
-
-        jDBButtonNew4.setJDBQuery(jDBQuerySlaveMotoristaContatos);
-
-        jDBButtonDelete2.setJDBQuery(jDBQuerySlaveMotoristaContatos);
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBTextField21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jDBButtonDelete2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBButtonNew4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDBButtonSave6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel26)
-                    .addComponent(jDBComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDBButtonSave6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonNew4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDBButtonDelete2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addComponent(jButton7)
+                .addContainerGap(415, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Contatos", jPanel11);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane3)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane3)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("Motoristas", jPanel5);
+        jTabbedPane1.addTab("Principal", jPanel2);
 
         jDBTextField2.setJDBQuery(jDBQueryConfig);
         jDBTextField2.setFieldName("mensalidade");
-        jDBTextField2.setjDBControlStyle(jDBControlStyle1);
 
         jLabel2.setText("Mensalidade");
 
@@ -1534,7 +216,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jDBTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addContainerGap(378, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jDBButtonSave7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1570,169 +252,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jDBQuerySlavePassageiroEnderecoAfterExecQuery(lib.jdb.jdbquery.event.ExecQueryEventObject evt) {//GEN-FIRST:event_jDBQuerySlavePassageiroEnderecoAfterExecQuery
-        if(jDBQuerySlavePassageiroEndereco.getRow() < 1){
-            jDBQuerySlavePassageiroEndereco.insert();
-        }
-    }//GEN-LAST:event_jDBQuerySlavePassageiroEnderecoAfterExecQuery
-
-    private void jDBQuerySlavePassageiroEnderecoOnSaveManually(lib.jdb.jdbquery.event.SaveManuallyEventObject evt) {//GEN-FIRST:event_jDBQuerySlavePassageiroEnderecoOnSaveManually
-        if(jDBQueryPassageiros.getCurrentFieldValueAsInteger("id") != null){
-            jDBQuerySlavePassageiroEndereco.save();
-        }
-    }//GEN-LAST:event_jDBQuerySlavePassageiroEnderecoOnSaveManually
-
-    private void jDBQuerySlavePassageiroAfterSave(lib.jdb.jdbquery.event.SaveEventObject evt) {//GEN-FIRST:event_jDBQuerySlavePassageiroAfterSave
-        String id = jDBQueryPassageiros.getCurrentFieldValue("id");
-        jDBQueryPassageiros.execQuery();
-        jDBQueryPassageiros.locate("id", id, true);
-    }//GEN-LAST:event_jDBQuerySlavePassageiroAfterSave
-
-    private void jDBQuerySlavePassageiroContatosAfterInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {//GEN-FIRST:event_jDBQuerySlavePassageiroContatosAfterInsert
-        jDBUpdateTransaction1.setSQL("insert into passageiro_contatos values("+ 
-                jDBQueryPassageiros.getCurrentFieldValue("id") +","+
-                jDBQuerySlavePassageiroContatos.getCurrentFieldValue("id")+")");
-        try {
-            jDBUpdateTransaction1.execUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(JFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jDBQuerySlavePassageiroContatosAfterInsert
-
-    private void jDBQuerySlavePassageiroBeforeInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {//GEN-FIRST:event_jDBQuerySlavePassageiroBeforeInsert
-        jDBQuerySlavePassageiro.setNewCurrentFieldValue("id", null);
-        jDBQuerySlavePassageiro.setNewCurrentFieldValue("endereco_id", null);
-    }//GEN-LAST:event_jDBQuerySlavePassageiroBeforeInsert
-
-    private void jDBQuerySlavePassageiroContatosBeforeInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {//GEN-FIRST:event_jDBQuerySlavePassageiroContatosBeforeInsert
-        jDBQuerySlavePassageiroContatos.setNewCurrentFieldValue("id", null);
-    }//GEN-LAST:event_jDBQuerySlavePassageiroContatosBeforeInsert
-
-    private void jDBTextFieldSalarioBrutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDBTextFieldSalarioBrutoKeyReleased
-        calcInss();
-    }//GEN-LAST:event_jDBTextFieldSalarioBrutoKeyReleased
-
-    private void jDBQuerySlaveMotoristaContatosBeforeInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {//GEN-FIRST:event_jDBQuerySlaveMotoristaContatosBeforeInsert
-        jDBQuerySlaveMotoristaContatos.setNewCurrentFieldValue("id", null);
-    }//GEN-LAST:event_jDBQuerySlaveMotoristaContatosBeforeInsert
-
-    private void jDBQuerySlaveMotoristaContatosAfterInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {//GEN-FIRST:event_jDBQuerySlaveMotoristaContatosAfterInsert
-        jDBUpdateTransaction1.setSQL("insert into motorista_contatos values("+ 
-                jDBQueryMotorista.getCurrentFieldValue("id") +","+
-                jDBQuerySlaveMotoristaContatos.getCurrentFieldValue("id")+")");
-        try {
-            jDBUpdateTransaction1.execUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(JFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jDBQuerySlaveMotoristaContatosAfterInsert
-
-    private void jDBQueryMotoristaAfterScroll(lib.jdb.jdbquery.event.ScrollEventObject evt) {//GEN-FIRST:event_jDBQueryMotoristaAfterScroll
-        calcInss();
-    }//GEN-LAST:event_jDBQueryMotoristaAfterScroll
-
-    private void jDBQueryRegistroDiarioAfterScroll(lib.jdb.jdbquery.event.ScrollEventObject evt) {//GEN-FIRST:event_jDBQueryRegistroDiarioAfterScroll
-        
-    }//GEN-LAST:event_jDBQueryRegistroDiarioAfterScroll
-
-    private void jDBQueryRegistroDiarioBeforeInsert(lib.jdb.jdbquery.event.InsertEventObject evt) {//GEN-FIRST:event_jDBQueryRegistroDiarioBeforeInsert
-        jDBQueryRegistroDiario.setNewCurrentFieldValue("preco_litro_combustivel", 
-                jDBQueryConfig.getCurrentFieldValue("preco_combustivel"));
-        jDBQueryRegistroDiario.setNewCurrentFieldValue("preco_pedagio", 
-                jDBQueryConfig.getCurrentFieldValue("preco_pedagio"));
-    }//GEN-LAST:event_jDBQueryRegistroDiarioBeforeInsert
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        jDBQueryPassageiros.first();
-        int n = 0;
-        do{
-            String data = Calendar.getInstance().getTime().toLocaleString().split(" ")[0];
-            jDBQueryMensallidade.setSQL("select * from mensalidade where passageiro_id = "+
-                    jDBQueryPassageiros.getCurrentFieldValue("id")+ 
-                    " and month(vencimento) = month(curdate()) and year(vencimento) = year(curdate())");
-            jDBQueryMensallidade.execQuery();
-            if(jDBQueryMensallidade.getQueryQuantity() == 1 || 
-                    jDBQueryPassageiros.getCurrentFieldValueAsString("Classificação").equals("S")) continue;
-            jDBQuerySlavePassageiroMensalidades.insert();
-            jDBQuerySlavePassageiroMensalidades.setNewCurrentFieldValue("passageiro_id", jDBQueryPassageiros.getCurrentFieldValue("id"));
-            float valorMensalidade = (jDBQueryPassageiros.getCurrentFieldValueAsBoolean("vai") ? 
-                    jDBQueryConfig.getCurrentFieldValueAsFloat("mensalidade")/2 : 0) +
-                    (jDBQueryPassageiros.getCurrentFieldValueAsBoolean("volta") ? 
-                    jDBQueryConfig.getCurrentFieldValueAsFloat("mensalidade")/2 : 0);
-            
-            jDBQuerySlavePassageiroMensalidades.setNewCurrentFieldValueAsFloat("valor", valorMensalidade );
-            jDBQuerySlavePassageiroMensalidades.setNewCurrentFieldValue("vencimento", "10/"+
-                    data.split("/")[1]+"/"+data.split("/")[2]);
-            
-            jDBQuerySlavePassageiroMensalidades.save();
-            n++;
-        }while(jDBQueryPassageiros.next()>0);
-        jDBQueryMensallidade.setSQL("select * from mensalidade");
-        jDBQueryMensallidade.execQuery();
-        JOptionPane.showMessageDialog(null, "Foram geradas "+n+" mensalidades.");
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jDBQueryPassageiros.locate("id", jDBQueryMensallidade.getCurrentFieldValue("passageiro_id"), true);
-        jTabbedPane1.setSelectedIndex(1);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jDBQueryMensallidade.locate("id", jDBQuerySlavePassageiroMensalidades.getCurrentFieldValue("id"),true);
-        jTabbedPane1.setSelectedIndex(0);
-        jTabbedPane5.setSelectedIndex(1);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jDBQuerySlaveMotoristaEnderecoOnSaveManually(lib.jdb.jdbquery.event.SaveManuallyEventObject evt) {//GEN-FIRST:event_jDBQuerySlaveMotoristaEnderecoOnSaveManually
-        jDBQuerySlaveMotoristaEndereco.save();
-    }//GEN-LAST:event_jDBQuerySlaveMotoristaEnderecoOnSaveManually
-
-    private void jDBQuerySlaveMotoristaEnderecoAfterExecQuery(lib.jdb.jdbquery.event.ExecQueryEventObject evt) {//GEN-FIRST:event_jDBQuerySlaveMotoristaEnderecoAfterExecQuery
-        if(jDBQuerySlaveMotoristaEndereco.getRow() < 1){
-            jDBQuerySlaveMotoristaEndereco.insert();
-        }
-    }//GEN-LAST:event_jDBQuerySlaveMotoristaEnderecoAfterExecQuery
-
-    private void jTextFieldBuscapassageiroNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscapassageiroNomeKeyReleased
-        jDBQueryPassageiros.setSQL(SQLPassageiros+ "where p.nome_completo like \"%"+ 
-                jTextFieldBuscapassageiroNome.getText() + "%\" order by p.nome_completo");
-        jDBQueryPassageiros.execQuery();
-    }//GEN-LAST:event_jTextFieldBuscapassageiroNomeKeyReleased
-
-    private void jComboBoxmesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxmesesActionPerformed
-       updateQryMensalidade();
-    }//GEN-LAST:event_jComboBoxmesesActionPerformed
-
-    private void jComboBoxSituacaoMensalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSituacaoMensalidadeActionPerformed
-        updateQryMensalidade();
-    }//GEN-LAST:event_jComboBoxSituacaoMensalidadeActionPerformed
-
     private void jDBQueryMensallidadeAfterExecQuery(lib.jdb.jdbquery.event.ExecQueryEventObject evt) {//GEN-FIRST:event_jDBQueryMensallidadeAfterExecQuery
-        float pago = 0, pendente = 0, total = 0;
-        int qtd = 0, qtdPend = 0;
-        jDBQueryMensallidade.first();
-        if(jDBQueryMensallidade.getRow()==0){
-            jLabelAReceber.setText(String.format("Total à Receber R$ %.2f", 0f));
-            jLabelRecebido.setText(String.format("Total Recebido R$ %.2f", 0f));
-            jLabelMensalidadesTotal.setText(String.format("Total R$ %.2f | %d faturas.",0f,0));
-            return;
-        }
-        do{
-            if(jDBQueryMensallidade.getCurrentFieldValueAsFloat("valor_recebido")==0){
-                pendente += jDBQueryMensallidade.getCurrentFieldValueAsFloat("valor");
-                qtdPend++;
-            }else pago += jDBQueryMensallidade.getCurrentFieldValueAsFloat("valor_recebido");
-            total +=  jDBQueryMensallidade.getCurrentFieldValueAsFloat("valor");
-            qtd++;
-        }while(jDBQueryMensallidade.next()>=1);
-        jDBQueryMensallidade.first();
-        jLabelAReceber.setText(String.format("Total à Receber R$ %.2f | %d mesalidades", pendente,qtdPend));
-        jLabelRecebido.setText(String.format("Total Recebido R$ %.2f | %d mesalidades", pago, qtd-qtdPend));
-        jLabelMensalidadesTotal.setText(String.format("De R$ %.2f | %d mesalidades.",total,qtd));
+        
     }//GEN-LAST:event_jDBQueryMensallidadeAfterExecQuery
 
     private void jDBQueryDespesasAfterExecQuery(lib.jdb.jdbquery.event.ExecQueryEventObject evt) {//GEN-FIRST:event_jDBQueryDespesasAfterExecQuery
-       float pago = 0, recebido = 0, balanco = 0;
+     /*  float pago = 0, recebido = 0, balanco = 0;
         int qtdRecebido = 0, qtdpago = 0;
         jDBQueryMensallidade.first();
         if(jDBQueryMensallidade.getRow()>0){
@@ -1763,25 +288,28 @@ public class JFramePrincipal extends javax.swing.JFrame {
             jLabelBalance2.setForeground(jLabelBalancoEntradas.getForeground());
             jLabelBalanco.setForeground(jLabelBalancoEntradas.getForeground());
         }
-        jLabelBalanco.setText(String.format("R$ %.2f", balanco));
+        jLabelBalanco.setText(String.format("R$ %.2f", balanco));*/
     }//GEN-LAST:event_jDBQueryDespesasAfterExecQuery
 
-    private void jComboBoxBalancoMesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxBalancoMesesActionPerformed
-        String sql = SQLDespesa, sqlM = SQLMensalidade;;
-         if(jComboBoxBalancoMeses.getSelectedIndex() > 0){
-            sql += " and month(data)="+(jComboBoxBalancoMeses.getSelectedIndex()+1);
-            sqlM += " and month(recebido_em)="+(jComboBoxBalancoMeses.getSelectedIndex()+1);
-         }
-         jDBQueryMensallidade.setSQL(sqlM);
-         jDBQueryMensallidade.execQuery();
-         jDBQueryDespesas.setSQL(sql);
-         jDBQueryDespesas.execQuery();
-         
-    }//GEN-LAST:event_jComboBoxBalancoMesesActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFramePassageiros();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        geraRelatorio();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JFrameMensalidades();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        new JFrameRegistroDiario(jDBQueryConfig.getJDBConnection()).show();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        new JFrameDespesas(jDBQueryConfig.getJDBConnection()).show();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        new JFrameMotoristas(jDBQueryConfig.getJDBConnection()).show();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void geraRelatorio(){
         Conexao con;
@@ -1798,7 +326,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         catch(Exception e){ JOptionPane.showMessageDialog(null, e);}
     }
     private void updateQryMensalidade(){
-        String sql = SQLMensalidade;
+      /*  String sql = SQLMensalidade;
          if(jComboBoxmeses.getSelectedIndex() > 0)
             sql += " and month(vencimento)="+(jComboBoxmeses.getSelectedIndex()+1);
          switch(jComboBoxSituacaoMensalidade.getSelectedItem().toString()){
@@ -1811,7 +339,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                  default: break;
          }
          jDBQueryMensallidade.setSQL(sql);
-         jDBQueryMensallidade.execQuery();
+         jDBQueryMensallidade.execQuery();*/
     }
     /**
      * @param args the command line arguments
@@ -1849,173 +377,23 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBoxBalancoMeses;
-    private javax.swing.JComboBox jComboBoxSituacaoMensalidade;
-    private javax.swing.JComboBox jComboBoxmeses;
-    private lib.jdb.control.jdbbuttondelete.JDBButtonDelete jDBButtonDelete1;
-    private lib.jdb.control.jdbbuttondelete.JDBButtonDelete jDBButtonDelete2;
-    private lib.jdb.control.jdbbuttondelete.JDBButtonDelete jDBButtonDelete3;
-    private lib.jdb.control.jdbbuttondelete.JDBButtonDelete jDBButtonDelete4;
-    private lib.jdb.control.jdbbuttondelete.JDBButtonDelete jDBButtonDelete5;
-    private lib.jdb.control.jdbbuttondelete.JDBButtonDelete jDBButtonDelete6;
-    private lib.jdb.control.jdbbuttonnew.JDBButtonNew jDBButtonNew1;
-    private lib.jdb.control.jdbbuttonnew.JDBButtonNew jDBButtonNew2;
-    private lib.jdb.control.jdbbuttonnew.JDBButtonNew jDBButtonNew3;
-    private lib.jdb.control.jdbbuttonnew.JDBButtonNew jDBButtonNew4;
-    private lib.jdb.control.jdbbuttonnew.JDBButtonNew jDBButtonNew5;
-    private lib.jdb.control.jdbbuttonnew.JDBButtonNew jDBButtonNew6;
-    private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave1;
-    private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave10;
-    private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave2;
-    private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave3;
-    private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave4;
-    private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave5;
-    private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave6;
+    private javax.swing.JButton jButton7;
     private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave7;
-    private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave8;
-    private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave9;
-    private lib.jdb.control.jdbcheckbox.JDBCheckBox jDBCheckBox1;
-    private lib.jdb.control.jdbcheckbox.JDBCheckBox jDBCheckBox2;
-    private lib.jdb.control.jdbcombobox.JDBComboBox jDBComboBox1;
-    private lib.jdb.control.jdbcombobox.JDBComboBox jDBComboBox2;
-    private lib.jdb.control.jdbcombobox.JDBComboBox jDBComboBox4;
     private lib.jdb.connection.JDBConnection jDBConnection1;
-    private lib.jdb.control.jdbcontrolstyle.JDBControlStyle jDBControlStyle1;
-    private lib.jdb.control.jdblookupcombobox.JDBLookUpComboBox jDBLookUpComboBox1;
     private lib.jdb.jdbquery.JDBQuery jDBQueryConfig;
-    private lib.jdb.jdbquery.JDBQuery jDBQueryCursos;
     private lib.jdb.jdbquery.JDBQuery jDBQueryDespesas;
     private lib.jdb.jdbquery.JDBQuery jDBQueryMensallidade;
-    private lib.jdb.jdbquery.JDBQuery jDBQueryMotorista;
     private lib.jdb.jdbquery.JDBQuery jDBQueryPassageiros;
-    private lib.jdb.jdbquery.JDBQuery jDBQueryRegistroDiario;
-    private lib.jdb.jdbquery.JDBQuerySlave jDBQuerySlaveMotoristaContatos;
-    private lib.jdb.jdbquery.JDBQuerySlave jDBQuerySlaveMotoristaEndereco;
-    private lib.jdb.jdbquery.JDBQuerySlave jDBQuerySlavePassageiro;
-    private lib.jdb.jdbquery.JDBQuerySlave jDBQuerySlavePassageiroContatos;
-    private lib.jdb.jdbquery.JDBQuerySlave jDBQuerySlavePassageiroEndereco;
-    private lib.jdb.jdbquery.JDBQuerySlave jDBQuerySlavePassageiroMensalidades;
-    private lib.jdb.control.jdbtable.JDBTable jDBTable1;
-    private lib.jdb.control.jdbtable.JDBTable jDBTable2;
-    private lib.jdb.control.jdbtable.JDBTable jDBTable3;
-    private lib.jdb.control.jdbtable.JDBTable jDBTable4;
-    private lib.jdb.control.jdbtable.JDBTable jDBTable5;
-    private lib.jdb.control.jdbtable.JDBTable jDBTable7;
-    private lib.jdb.control.jdbtable.JDBTable jDBTable8;
-    private lib.jdb.control.jdbtable.JDBTable jDBTable9;
-    private lib.jdb.control.jdbtextarea.JDBTextArea jDBTextArea1;
-    private lib.jdb.control.jdbtextarea.JDBTextArea jDBTextArea2;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField1;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField10;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField11;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField12;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField13;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField14;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField16;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField17;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField18;
     private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField2;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField21;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField24;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField26;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField29;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField3;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField31;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField32;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField33;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField34;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField35;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField4;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField5;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField6;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField9;
-    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextFieldSalarioBruto;
     private lib.jdb.jdbupdatetransaction.JDBUpdateTransaction jDBUpdateTransaction1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelAReceber;
-    private javax.swing.JLabel jLabelBalance2;
-    private javax.swing.JLabel jLabelBalanco;
-    private javax.swing.JLabel jLabelBalancoEntradas;
-    private javax.swing.JLabel jLabelBalancoEntradas1;
-    private javax.swing.JLabel jLabelBalancoEntradasQtd;
-    private javax.swing.JLabel jLabelBalncoMensal;
-    private javax.swing.JLabel jLabelMensalidadesTotal;
-    private javax.swing.JLabel jLabelRecebido;
-    private javax.swing.JLabel jLabelSalLiquido;
-    private javax.swing.JLabel jLabelTotalDespesas;
-    private javax.swing.JLabel jLabelTotalDespesas1;
-    private javax.swing.JLabel jLabelTotalDespesasQtd;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTextField jTextFieldBuscapassageiroNome;
     // End of variables declaration//GEN-END:variables
 
-    private void calcInss() {
-        if(jDBTextFieldSalarioBruto.getText().length() > 0){
-            float sal = Float.parseFloat(jDBTextFieldSalarioBruto.getText().replace(",", "."));
-            jLabelSalLiquido.setText(String.format("INSS R$ %.2f + Salário Líquido R$ %.2f", 
-                    sal*0.1015,sal-(sal*0.1015)));
-        }
-    }
 }
