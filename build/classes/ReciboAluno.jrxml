@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe575b60-a79c-4cf8-8390-4366c4cf54a4">
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="34"/>
+	<property name="ireport.y" value="118"/>
+	<queryString>
+		<![CDATA[select p.*, e.*, m.id as mid, month(m.vencimento) as vencimento, m.valor_recebido, 
+m.valor, m.desconto from passageiro p 
+inner join endereco_passageiro e on p.id = e.passageiro_id
+inner join mensalidade m on p.id = m.passageiro_id
+
+where (p.vai or p.volta) 
+	and m.id in(80)]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome_completo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="curso_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="semestre" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="classificacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vai" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="volta" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rua" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="num" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="complemento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cep" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="passageiro_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mid" class="java.lang.Integer"/>
+	<field name="vencimento" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor_recebido" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desconto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="ValorComDesconto" class="java.lang.String">
+		<variableExpression><![CDATA[$F{valor}.subtract( $F{desconto} )]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="189" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="275" height="187" backcolor="#F8F8F8" uuid="ece06720-24ba-4f51-9500-f9a909e4c10f"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="12" y="27" width="253" height="80" uuid="049d0f8b-0541-4d90-a617-9ecd185ab330"/>
+			</rectangle>
+			<textField>
+				<reportElement x="13" y="29" width="252" height="16" uuid="9d3f4af0-f7f8-4cbc-913a-6ee7f668fb15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Recebi de "+$F{nome_completo} +" | "+ $F{cpf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="90" y="0" width="89" height="23" uuid="efecdba9-3de0-4a80-9251-7d61bffb5520"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[RECIBO]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="179" y="3" width="86" height="20" uuid="c646e53d-fa34-4c59-9da1-5c60fcf8bf25"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="190" y="3" width="24" height="20" uuid="9b95194b-c29e-4039-ad54-faed3dbacc1f"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="12" y="3" width="78" height="20" uuid="ca445a9c-bbf8-40f2-9ab3-e432bcacbcb5"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="3" width="12" height="20" uuid="fd39d3d7-c9a5-4a52-b224-054d571c3463"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="13" y="45" width="252" height="12" uuid="a100240d-e1dc-45c1-86c5-23c5c2a6b79b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Endereço "+$F{rua}+","+$F{num} +" - "+ $F{bairro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="13" y="57" width="252" height="11" uuid="60db39a1-2e6a-4bfe-8406-70cdd579e1f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["A importância de "+ ($F{valor}.floatValue()==(140.00f)?"Cento e Quarenta":$F{valor}.floatValue()==(120.00f)?"Cento e Vinte":"Cinquenta") +" Reais." ]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="3" width="48" height="20" uuid="8e77472c-a7d8-4660-8215-a5e22341f350"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="190" y="3" width="67" height="20" uuid="05484686-16b7-4832-a404-ec20d1440faa"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valor}.subtract( $F{desconto} )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="107" width="245" height="20" uuid="ce90117f-eb2b-434f-a298-12d3dd3e7852"/>
+				<text><![CDATA[Para maior clareza firmo __________ o presente.]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="12" y="120" width="253" height="20" uuid="ac7f6fdd-e493-471c-81bf-c3b54b4fcf20"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="12" y="143" width="253" height="38" uuid="8d059ff4-7118-4258-adda-a3881b7b99a5"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="13" y="149" width="252" height="32" uuid="117658e5-ecce-42bc-abb1-7eb32afb4abc"/>
+				<text><![CDATA[Emissor: Vinicius M. Ferraz  |
+CPF 367.571.578-70            | Ass:_______________
+]]></text>
+			</staticText>
+			<textField pattern="&apos;Referente a mensalidade de &apos;MMMMM &apos;de&apos; yyyy">
+				<reportElement x="13" y="87" width="252" height="20" uuid="a8d85840-7c8d-4a70-a478-d54fcb8370c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos;ITAPEVA ____ de &apos;MMMMM &apos;de&apos; yyyy">
+				<reportElement x="20" y="123" width="237" height="17" uuid="8c5ee912-886a-4f71-90e6-d0460acd3eee"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="Desconto referente a viagens em pé ¤ #,##0.00">
+				<reportElement x="13" y="68" width="253" height="11" uuid="2794dca6-fd6b-4dd7-8c49-5d79aa4dc706"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desconto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe575b60-a79c-4cf8-8390-4366c4cf54a4">
 	<property name="ireport.zoom" value="1.9487171000000014"/>
-	<property name="ireport.x" value="11"/>
+	<property name="ireport.x" value="34"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[select p.*, e.*, m.id as mid, month(m.vencimento) as vencimento, 
+		<![CDATA[select p.*, e.*, m.id as mid, month(m.vencimento) as vencimento, m.valor_recebido, 
 m.valor from passageiro p 
 inner join endereco_passageiro e on p.id = e.passageiro_id
 inner join mensalidade m on p.id = m.passageiro_id
 
-where month(m.vencimento) = 2 and p.id not in(14,45) and m.valor_recebido = 0
-or p.id in(29,58)]]>
+where (p.vai or p.volta) 
+	and m.id in(25,80)]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -59,6 +59,9 @@ or p.id in(29,58)]]>
 	</field>
 	<field name="mid" class="java.lang.Integer"/>
 	<field name="vencimento" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor_recebido" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="valor" class="java.math.BigDecimal">
@@ -126,11 +129,6 @@ or p.id in(29,58)]]>
 				<reportElement x="13" y="67" width="252" height="20" uuid="60db39a1-2e6a-4bfe-8406-70cdd579e1f4"/>
 				<textFieldExpression><![CDATA["A importância de "+ ($F{valor}.floatValue()==(140.00f)?"Cento e Quarenta":$F{valor}.floatValue()==(120.00f)?"Cento e Vinte":"Cinquenta") +" Reais"]]></textFieldExpression>
 			</textField>
-			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="13" y="87" width="252" height="20" uuid="1861f820-efed-4ece-ac49-33b87b7c7b33"/>
-				<textFieldExpression><![CDATA["Referente a mensalidade de "+
-(new java.text.DateFormatSymbols().getMonths()[$F{vencimento}.intValue()-1])+ " de 2015"]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="32" y="3" width="48" height="20" uuid="8e77472c-a7d8-4660-8215-a5e22341f350"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -148,19 +146,23 @@ or p.id in(29,58)]]>
 			<rectangle radius="10">
 				<reportElement x="12" y="120" width="253" height="20" uuid="ac7f6fdd-e493-471c-81bf-c3b54b4fcf20"/>
 			</rectangle>
-			<staticText>
-				<reportElement x="20" y="120" width="237" height="20" uuid="e7ddb95d-b30e-4dea-afae-88938ad6cdc5"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[ITAPEVA, ____ de fevereiro de 2015]]></text>
-			</staticText>
 			<rectangle radius="10">
 				<reportElement x="12" y="143" width="253" height="38" uuid="8d059ff4-7118-4258-adda-a3881b7b99a5"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="13" y="149" width="252" height="32" uuid="117658e5-ecce-42bc-abb1-7eb32afb4abc"/>
-				<text><![CDATA[Emitente Vinicius Martins Ferraz. CPF 367.571.578-70
-Assinatura _________________________________]]></text>
+				<text><![CDATA[Emissor: Vinicius M. Ferraz. |
+CPF 367.571.578-70            | Ass:_______________
+]]></text>
 			</staticText>
+			<textField pattern="&apos;Referente a mensalidade de &apos;MMMMM &apos;de&apos; yyyy">
+				<reportElement x="13" y="87" width="252" height="20" uuid="a8d85840-7c8d-4a70-a478-d54fcb8370c9"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos;ITAPEVA ____ de &apos;MMMMM &apos;de&apos; yyyy">
+				<reportElement x="20" y="123" width="237" height="17" uuid="8c5ee912-886a-4f71-90e6-d0460acd3eee"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

@@ -13,6 +13,7 @@ import lib.jdb.connection.JDBConnection;
  */
 public class JFramePassageiros extends javax.swing.JFrame {
         String SQLPassageiros = "select  * from passageiro ";
+        JFramePrincipal jfP=null;
 
     /**
      * Creates new form JFramePassageiros
@@ -28,6 +29,7 @@ public class JFramePassageiros extends javax.swing.JFrame {
         this.jDBQuerySlavePassageiroEndereco.setJDBConnection(jfP.getJDBConnection());
         this.jDBQuerySlavePassageiroMensalidades.setJDBConnection(jfP.getJDBConnection());
         this.jDBQueryPassageiros.execQuery();
+        this.jfP=jfP;
     }
     public JFramePassageiros(JFramePrincipal jfP,int passageiroId) {
         initComponents();
@@ -38,6 +40,7 @@ public class JFramePassageiros extends javax.swing.JFrame {
         this.jDBQuerySlavePassageiroMensalidades.setJDBConnection(jfP.getJDBConnection());
         this.jDBQueryPassageiros.execQuery();
         this.jDBQueryPassageiros.locate("id", Integer.toString(passageiroId), false);
+        this.jfP=jfP;
     }
 
     /**
@@ -98,6 +101,7 @@ public class JFramePassageiros extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jDBTable5 = new lib.jdb.control.jdbtable.JDBTable();
         jButtonPagar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jDBTable1 = new lib.jdb.control.jdbtable.JDBTable();
 
@@ -448,6 +452,7 @@ public class JFramePassageiros extends javax.swing.JFrame {
             }
         ));
         jDBTable5.setJDBQuery(jDBQuerySlavePassageiroMensalidades);
+        jDBTable5.setEditable(false);
         jDBTable5.setInvisibleFields("passageiro_id");
         jScrollPane5.setViewportView(jDBTable5);
 
@@ -458,6 +463,13 @@ public class JFramePassageiros extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Detalhes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -465,17 +477,21 @@ public class JFramePassageiros extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonPagar)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonPagar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(60, 60, 60)
                 .addComponent(jButtonPagar)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -576,6 +592,10 @@ public class JFramePassageiros extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jDBQuerySlavePassageiroEnderecoOnSaveManually
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jfP.JFrameMensalidades(jDBQuerySlavePassageiroMensalidades.getCurrentFieldValue("id"));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -613,6 +633,7 @@ public class JFramePassageiros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonPagar;
     private lib.jdb.control.jdbbuttondelete.JDBButtonDelete jDBButtonDelete1;
     private lib.jdb.control.jdbbuttondelete.JDBButtonDelete jDBButtonDelete4;

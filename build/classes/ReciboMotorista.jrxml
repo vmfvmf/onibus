@@ -2,9 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2771d0df-d3ef-4329-8696-dfabf99346af">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="255"/>
 	<queryString>
-		<![CDATA[select * from motorista]]>
+		<![CDATA[select * from motorista WHERE ID =1]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -111,7 +111,7 @@
 			<staticText>
 				<reportElement x="352" y="63" width="71" height="20" uuid="ea1a8a99-a140-432b-830a-6edcabdfcb65"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[FEV/14]]></text>
+				<text><![CDATA[MAR/15]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="22" width="555" height="1" uuid="4335b0d9-5b97-40af-99ba-d75ad7787f7f"/>
@@ -146,7 +146,7 @@
 			<staticText>
 				<reportElement x="0" y="163" width="49" height="20" uuid="36d54600-e0ad-4b87-a906-9baf684d285b"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[]]></text>
+				<text><![CDATA[4]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="183" width="49" height="20" uuid="d32b57fe-c5cb-4c15-9d82-4e7ca1d4e55a"/>
@@ -237,7 +237,7 @@ do montante ao orgão responsável.]]></text>
 			<staticText>
 				<reportElement x="49" y="163" width="122" height="20" uuid="81253487-6193-4d42-8286-838532575074"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[]]></text>
+				<text><![CDATA[ADIANTAMENTO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="49" y="183" width="122" height="20" uuid="13e4306f-4292-47fa-9eb4-e1d7e247249e"/>
@@ -261,8 +261,10 @@ do montante ao orgão responsável.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="172" y="163" width="108" height="20" uuid="413e6989-9dcb-4989-a6b1-5b531132605f"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[]]></text>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[4/3(Pedágio economizado)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="172" y="123" width="108" height="20" uuid="e92a41f8-ec78-4f9e-8097-feed00d62055"/>
@@ -332,7 +334,7 @@ do montante ao orgão responsável.]]></text>
 			<staticText>
 				<reportElement x="353" y="163" width="70" height="20" uuid="f8748a45-3a94-4ece-8a04-e7b10d39ab01"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<text><![CDATA[]]></text>
+				<text><![CDATA[21,20]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="353" y="183" width="70" height="20" uuid="0caaf68d-cf33-4cc7-883f-9daecda837f6"/>
@@ -357,7 +359,7 @@ do montante ao orgão responsável.]]></text>
 			<staticText>
 				<reportElement x="529" y="44" width="26" height="278" uuid="78208f12-df90-4df3-ae17-eec58409b085"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left"/>
-				<text><![CDATA[ITAPEVA - 10 DE FEVEREIRO DE 2014]]></text>
+				<text><![CDATA[ITAPEVA - 10 DE MARÇO DE 2015]]></text>
 			</staticText>
 			<line>
 				<reportElement x="507" y="84" width="1" height="193" uuid="d159e505-da06-4597-a32c-9bd1f3b59de3"/>
@@ -444,7 +446,7 @@ do montante ao orgão responsável.]]></text>
 			<staticText>
 				<reportElement x="352" y="420" width="71" height="20" uuid="f54870c0-e55c-4f4e-8a84-40b36533d0da"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[FEV/14]]></text>
+				<text><![CDATA[MAR/15]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="379" width="555" height="1" uuid="6188a1f5-4885-406b-a409-8b30ea083a1f"/>
@@ -479,7 +481,7 @@ do montante ao orgão responsável.]]></text>
 			<staticText>
 				<reportElement x="0" y="520" width="49" height="20" uuid="5cf90c96-b7bb-4c2c-9b6a-53d7556aa4b8"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[]]></text>
+				<text><![CDATA[4]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="540" width="49" height="20" uuid="7ea811a7-1a41-4bc2-b4fd-fb83e9e10cb3"/>
@@ -570,7 +572,7 @@ do montante ao orgão responsável.]]></text>
 			<staticText>
 				<reportElement x="49" y="520" width="122" height="20" uuid="3a36841f-7b4d-48b9-83e8-ff73d1b524d8"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[]]></text>
+				<text><![CDATA[ADIANTAMENTO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="49" y="540" width="122" height="20" uuid="74b42607-1fd9-4491-a4e3-cc654cdf3ae5"/>
@@ -594,8 +596,10 @@ do montante ao orgão responsável.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="172" y="520" width="108" height="20" uuid="2cf89080-a867-42c2-b16f-a65f7170e102"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[]]></text>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[4/3(Pedágio economizado)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="172" y="480" width="108" height="20" uuid="84e972cf-b20f-464d-844d-6272fa9f91be"/>
@@ -665,7 +669,7 @@ do montante ao orgão responsável.]]></text>
 			<staticText>
 				<reportElement x="353" y="520" width="70" height="20" uuid="6a7fa1e7-fcb9-4a13-8949-82eb63bb6918"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<text><![CDATA[]]></text>
+				<text><![CDATA[21,20]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="353" y="541" width="70" height="20" uuid="effb2292-9d0e-4df7-b048-23b7cb6e021f"/>
@@ -690,7 +694,7 @@ do montante ao orgão responsável.]]></text>
 			<staticText>
 				<reportElement x="529" y="401" width="26" height="278" uuid="e626d33f-38ef-4ce7-8fe8-2a58d567b38a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left"/>
-				<text><![CDATA[ITAPEVA - 10 DE FEVEREIRO DE 2014]]></text>
+				<text><![CDATA[ITAPEVA - 10 DE MARÇO DE 2015]]></text>
 			</staticText>
 			<line>
 				<reportElement x="507" y="441" width="1" height="193" uuid="5a8a779a-3430-43fe-8c35-f19febf3a33b"/>
@@ -713,12 +717,12 @@ do montante ao orgão responsável.]]></text>
 			<staticText>
 				<reportElement x="354" y="615" width="70" height="20" uuid="18d85a21-8f05-41a5-a0ad-530b77ff5f69"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<text><![CDATA[0,00]]></text>
+				<text><![CDATA[21,20]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="280" y="654" width="142" height="20" uuid="754bf961-d58e-4df2-a605-b4e1cf72c554"/>
+				<reportElement mode="Opaque" x="282" y="654" width="140" height="25" backcolor="#B6ABAB" uuid="754bf961-d58e-4df2-a605-b4e1cf72c554"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<text><![CDATA[1560,00]]></text>
+				<text><![CDATA[R$ 1538,80]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="281" y="256" width="70" height="20" uuid="a20303e3-f195-427b-aca0-f5106478f772"/>
@@ -726,14 +730,14 @@ do montante ao orgão responsável.]]></text>
 				<text><![CDATA[1560,00]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="279" y="296" width="142" height="20" uuid="348f3178-aef2-4d02-81c7-a1032023ce95"/>
+				<reportElement mode="Opaque" x="282" y="297" width="140" height="25" backcolor="#B6ABAB" uuid="348f3178-aef2-4d02-81c7-a1032023ce95"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<text><![CDATA[1560,00]]></text>
+				<text><![CDATA[R$ 1538,80]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="353" y="257" width="70" height="20" uuid="a1f21c41-d8c9-4815-97b4-b9358190f4d7"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<text><![CDATA[0,00]]></text>
+				<text><![CDATA[21,20]]></text>
 			</staticText>
 		</band>
 	</detail>

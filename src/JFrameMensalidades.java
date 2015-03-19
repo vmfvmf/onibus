@@ -26,10 +26,11 @@ public class JFrameMensalidades extends javax.swing.JFrame {
         jDBQueryMensallidade.execQuery();
         this.jfP=jfP;
     }
-    public JFrameMensalidades(JFramePrincipal jfP, int mensalidadeId) {
+    public JFrameMensalidades(JFramePrincipal jfP, String mensalidadeId) {
         initComponents();
         jDBQueryMensallidade.setJDBConnection(jfP.getJDBConnection());
         jDBQueryMensallidade.execQuery();
+        jDBQueryMensallidade.locate("id", mensalidadeId, true);
         this.jfP=jfP;
     }
 
@@ -64,6 +65,10 @@ public class JFrameMensalidades extends javax.swing.JFrame {
         jLabelAReceber = new javax.swing.JLabel();
         jLabelMensalidadesTotal = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel45 = new javax.swing.JLabel();
+        jDBTextField35 = new lib.jdb.control.jdbtextfield.JDBTextField();
+        jLabel46 = new javax.swing.JLabel();
+        jDBTextArea1 = new lib.jdb.control.jdbtextarea.JDBTextArea();
 
         jDBQueryMensallidade.setSQL("select * from mensalidade");
         jDBQueryMensallidade.addExecQueryEventListener(new lib.jdb.jdbquery.event.ExecQueryEventListener() {
@@ -128,6 +133,8 @@ public class JFrameMensalidades extends javax.swing.JFrame {
         jDBTextField34.setFieldName("valor_recebido");
         jDBTextField34.setjDBControlStyle(jDBControlStyle1);
 
+        jDBButtonSave10.setJDBQuery(jDBQueryMensallidade);
+
         jComboBoxSituacaoMensalidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas", "Pagas", "Abertas" }));
         jComboBoxSituacaoMensalidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +158,18 @@ public class JFrameMensalidades extends javax.swing.JFrame {
         jLabelMensalidadesTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelMensalidadesTotal.setText("De R$ ##,## | x faturas");
 
+        jLabel45.setText("Desconto");
+
+        jDBTextField35.setJDBQuery(jDBQueryMensallidade);
+        jDBTextField35.setFieldName("desconto");
+        jDBTextField35.setjDBControlStyle(jDBControlStyle1);
+
+        jLabel46.setText("Obs.");
+
+        jDBTextArea1.setJDBQuery(jDBQueryMensallidade);
+        jDBTextArea1.setFieldName("obs");
+        jDBTextArea1.setjDBControlStyle(jDBControlStyle1);
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
@@ -160,20 +179,7 @@ public class JFrameMensalidades extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
                     .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonGerarMensalidades)
-                            .addGroup(jPanel18Layout.createSequentialGroup()
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel43)
-                                    .addComponent(jLabel41)
-                                    .addComponent(jLabel36)
-                                    .addComponent(jLabel44))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDBTextField34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDBTextField31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDBTextField32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDBTextField33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jButtonGerarMensalidades)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel18Layout.createSequentialGroup()
@@ -191,7 +197,26 @@ public class JFrameMensalidades extends javax.swing.JFrame {
                                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jDBButtonSave10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jDBButtonSave10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel43)
+                            .addComponent(jLabel41)
+                            .addComponent(jLabel36)
+                            .addComponent(jLabel44)
+                            .addComponent(jLabel45)
+                            .addComponent(jLabel46))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDBTextArea1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jDBTextField32, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                    .addComponent(jDBTextField31, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDBTextField33, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDBTextField34, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDBTextField35, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
@@ -222,12 +247,24 @@ public class JFrameMensalidades extends javax.swing.JFrame {
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel44)
-                        .addComponent(jDBTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelMensalidadesTotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
-                .addComponent(jDBButtonSave10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelMensalidadesTotal)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel44)
+                            .addComponent(jDBTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel45)
+                            .addComponent(jDBTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jDBTextArea1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDBButtonSave10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jLabel46)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -244,12 +281,12 @@ public class JFrameMensalidades extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
+            .addGap(0, 622, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 11, Short.MAX_VALUE)
                     .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 12, Short.MAX_VALUE)))
         );
 
         pack();
@@ -380,14 +417,18 @@ public class JFrameMensalidades extends javax.swing.JFrame {
     private lib.jdb.control.jdbcontrolstyle.JDBControlStyle jDBControlStyle1;
     private lib.jdb.jdbquery.JDBQuery jDBQueryMensallidade;
     private lib.jdb.control.jdbtable.JDBTable jDBTable9;
+    private lib.jdb.control.jdbtextarea.JDBTextArea jDBTextArea1;
     private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField31;
     private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField32;
     private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField33;
     private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField34;
+    private lib.jdb.control.jdbtextfield.JDBTextField jDBTextField35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabelAReceber;
     private javax.swing.JLabel jLabelMensalidadesTotal;
     private javax.swing.JLabel jLabelRecebido;

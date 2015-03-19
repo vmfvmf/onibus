@@ -1,8 +1,5 @@
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lib.jdb.connection.JDBConnection;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
@@ -62,7 +59,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jfMensalidades=new JFrameMensalidades(this);
         jfMensalidades.show();
     }
-    public void JFrameMensalidades(int mensalidadeId){
+    public void JFrameMensalidades(String mensalidadeId){
         if(jfMensalidades!=null){
             jfMensalidades.dispose();
         }
@@ -91,6 +88,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jDBTextField2 = new lib.jdb.control.jdbtextfield.JDBTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -103,7 +101,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jDBConnection1.setUserName("root");
 
         jDBQueryPassageiros.setJDBConnection(jDBConnection1);
-        jDBQueryPassageiros.setSQL("select \np.id, \np.curso_id,\np.nome_completo as \"Nome\", \np.cpf as \"CPF\",\nc.curso as \"Curso\", \np.classificacao as \"Classificação\" ,\np.vai,\np.volta\n\nfrom passageiro p \ninner join curso c on p.curso_id = c.id\n\norder by p.nome_completo");
+        jDBQueryPassageiros.setSQL("select * from passageiro");
         jDBQueryPassageiros.setConcurUpdatable(false);
 
         jDBUpdateTransaction1.setJDBConnection(jDBConnection1);
@@ -168,6 +166,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton8.setText("Gera Mensalidades");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -179,8 +184,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     .addComponent(jButton4)
                     .addComponent(jButton5)
                     .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addContainerGap(578, Short.MAX_VALUE))
+                    .addComponent(jButton7)
+                    .addComponent(jButton8))
+                .addContainerGap(552, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +201,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
-                .addContainerGap(415, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8)
+                .addContainerGap(378, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Principal", jPanel2);
@@ -311,6 +319,20 @@ public class JFramePrincipal extends javax.swing.JFrame {
         new JFrameMotoristas(jDBQueryConfig.getJDBConnection()).show();
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        jDBQueryPassageiros.execQuery();
+        int count = 0;
+        while(jDBQueryPassageiros.next()>0){
+            jDBQueryMensallidade.insert();
+            jDBQueryMensallidade.setNewCurrentFieldValue("passageiro_id", jDBQueryPassageiros.getCurrentFieldValue("id"));
+            jDBQueryMensallidade.setNewCurrentFieldValue("valor", jDBQueryConfig.getCurrentFieldValue("mensalidade"));
+            jDBQueryMensallidade.setNewCurrentFieldValue("vencimento", "2015/03/10");
+            jDBQueryMensallidade.save();
+            count++;
+        }
+        JOptionPane.showMessageDialog(null, "Foram geradas "+count+" mensalidades.");
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     private void geraRelatorio(){
         Conexao con;
         ResultSet rs;
@@ -382,6 +404,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private lib.jdb.control.jdbbuttonsave.JDBButtonSave jDBButtonSave7;
     private lib.jdb.connection.JDBConnection jDBConnection1;
     private lib.jdb.jdbquery.JDBQuery jDBQueryConfig;

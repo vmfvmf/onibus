@@ -48,12 +48,12 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="547" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="622" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                   <Component id="jPanel18" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -70,24 +70,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane10" alignment="0" pref="642" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButtonGerarMensalidades" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel43" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel41" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel36" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel44" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jDBTextField34" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jDBTextField31" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jDBTextField32" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jDBTextField33" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
+                          <Component id="jButtonGerarMensalidades" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -111,6 +94,30 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jDBButtonSave10" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel43" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel41" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel36" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel44" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel45" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel46" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jDBTextArea1" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jDBTextField32" alignment="0" pref="90" max="32767" attributes="0"/>
+                                      <Component id="jDBTextField31" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jDBTextField33" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jDBTextField34" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jDBTextField35" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -150,14 +157,31 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jDBTextField34" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="jLabelMensalidadesTotal" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDBTextField34" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDBTextField35" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="147" max="32767" attributes="0"/>
-                  <Component id="jDBButtonSave10" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jDBTextArea1" pref="135" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jDBButtonSave10" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -266,6 +290,11 @@
           </Properties>
         </Component>
         <Component class="lib.jdb.control.jdbbuttonsave.JDBButtonSave" name="jDBButtonSave10">
+          <Properties>
+            <Property name="JDBQuery" type="lib.jdb.jdbquery.JDBQuery" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="jDBQueryMensallidade"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxSituacaoMensalidade">
           <Properties>
@@ -321,6 +350,38 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel45">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Desconto"/>
+          </Properties>
+        </Component>
+        <Component class="lib.jdb.control.jdbtextfield.JDBTextField" name="jDBTextField35">
+          <Properties>
+            <Property name="JDBQuery" type="lib.jdb.jdbquery.JDBQuery" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="jDBQueryMensallidade"/>
+            </Property>
+            <Property name="fieldName" type="java.lang.String" value="desconto"/>
+            <Property name="jDBControlStyle" type="lib.jdb.control.jdbcontrolstyle.JDBControlStyle" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="jDBControlStyle1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel46">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Obs."/>
+          </Properties>
+        </Component>
+        <Component class="lib.jdb.control.jdbtextarea.JDBTextArea" name="jDBTextArea1">
+          <Properties>
+            <Property name="JDBQuery" type="lib.jdb.jdbquery.JDBQuery" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="jDBQueryMensallidade"/>
+            </Property>
+            <Property name="fieldName" type="java.lang.String" value="obs"/>
+            <Property name="jDBControlStyle" type="lib.jdb.control.jdbcontrolstyle.JDBControlStyle" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="jDBControlStyle1"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

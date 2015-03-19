@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3bcfc1d8-ef5d-43bc-a3b2-1eb47400087d">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select count(*),sum(valor_recebido), sum(valor), recebido_em, vencimento from mensalidade where month(vencimento)=2 group by recebido_em]]>
+	</queryString>
+	<field name="count(*)" class="java.lang.Long"/>
+	<field name="sum(valor_recebido)" class="java.math.BigDecimal"/>
+	<field name="sum(valor)" class="java.math.BigDecimal"/>
+	<field name="recebido_em" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vencimento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="sum(valor_recebido)_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(valor_recebido)}]]></variableExpression>
+	</variable>
+	<variable name="sum(valor)_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(valor)}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="141" y="0" width="305" height="42" uuid="b24b6ceb-77aa-4c4f-afb8-74a9a5fa619c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMISSÃO ONIBUS FAFIT/ITAPEVA
+2015]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="0" width="88" height="20" uuid="2a5fe7f9-febf-4637-922a-e690bd558830"/>
+				<text><![CDATA[Qtd Mensalidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="0" width="100" height="20" uuid="9c6428df-8509-4a72-ad8c-63a22c9eaa0e"/>
+				<text><![CDATA[Subtotal a Receber     ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="0" width="100" height="20" uuid="ede50cc4-b1ba-43a5-9bdf-58a66d613db0"/>
+				<text><![CDATA[Subtotal Recebido     /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="580a99be-3225-44bc-8d52-23f9a19aaccf"/>
+				<text><![CDATA[Dia Recebimento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="3" width="88" height="20" uuid="2b457eed-465e-41f3-9288-947ec5c4ab6a"/>
+				<textFieldExpression><![CDATA[$F{count(*)}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="288" y="3" width="100" height="20" uuid="285ce69d-11bb-4f21-ad64-aa11bd1ba4e4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{sum(valor)}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="188" y="3" width="100" height="20" uuid="c38a9a54-be2f-41df-be48-130a868a77da"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{sum(valor_recebido)}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="3" width="100" height="20" uuid="7cb3e08d-893a-4750-99c2-c3c1ef90b484"/>
+				<textFieldExpression><![CDATA[$F{recebido_em}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="47c7c532-84aa-4f77-a784-263fb31f7511"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="077dbbcc-5e44-4280-b553-a0be6de470d5"/>
+				<text><![CDATA[Total Recebido]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="100" y="2" width="88" height="20" uuid="e4efe937-e6e2-46da-a400-5be463086e8f"/>
+				<textFieldExpression><![CDATA[$V{sum(valor_recebido)_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="22" width="100" height="20" uuid="20211e26-fe55-45f4-8289-36c235073245"/>
+				<text><![CDATA[Total a Receber]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="100" y="22" width="100" height="20" uuid="f2c286f2-6169-4c40-b429-5613db44f49a"/>
+				<textFieldExpression><![CDATA[$V{sum(valor)_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="230" y="22" width="325" height="20" uuid="f0696d38-6b8f-4f24-81de-bfee7dc62536"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Mês de referência: Fevereiro de 2015]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

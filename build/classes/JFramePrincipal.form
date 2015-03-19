@@ -16,7 +16,7 @@
         <Property name="JDBConnection" type="lib.jdb.connection.JDBConnection" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="jDBConnection1"/>
         </Property>
-        <Property name="SQL" type="java.lang.String" value="select &#xa;p.id, &#xa;p.curso_id,&#xa;p.nome_completo as &quot;Nome&quot;, &#xa;p.cpf as &quot;CPF&quot;,&#xa;c.curso as &quot;Curso&quot;, &#xa;p.classificacao as &quot;Classifica&#xe7;&#xe3;o&quot; ,&#xa;p.vai,&#xa;p.volta&#xa;&#xa;from passageiro p &#xa;inner join curso c on p.curso_id = c.id&#xa;&#xa;order by p.nome_completo"/>
+        <Property name="SQL" type="java.lang.String" value="select * from passageiro"/>
         <Property name="concurUpdatable" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -117,8 +117,9 @@
                           <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton8" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="578" max="32767" attributes="0"/>
+                      <EmptySpace pref="552" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -135,7 +136,9 @@
                       <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="415" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="378" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -179,6 +182,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton8">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gera Mensalidades"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
